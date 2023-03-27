@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+   <meta charset="UTF-8">
+   <meta http-equiv="X-UA-Compatible" content="IE=edge">
+   <meta name="viewport" content="width=device-width, initial-scale=1.0">
+   <title>Document</title>
+   <link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@600&display=swap" rel="stylesheet">
+   <style>
+      body{
+         background-color:black;
+         padding: 0px;
+         margin: 0px;
+         font-family: 'Orbitron', sans-serif;
+         
+      }
+      .container{
+         text-align: center;
+         color: red;
+         justify-content: center;
+         align-items: center;
+         height: 100vh;
+         width: 100%;
+         display: flex;
+      }
+      span{
+         font-size: 100px;
+      }
+      #clock{
+         font-size: 120px;
+         border: 5px solid red;
+         padding: 15px;
+      }
+   </style>
+</head>
+<body>
+   <h1 style="text-align: center; color: red; font-size: 50px;">Digital Clock</h1>
+   <div class="container">
+      <span class="clock" id="clock">3:15 AM</span>
+   </div>
+   <div style="color: "white";">
+      <span> <button style="width: 150px; height: 30px; font-size: 20px;" id="stopTime" onclick="stopTime()">Stop Time</button></span>
+      <span> <button style="width: 150px; height: 30px; font-size: 20px;" id="OnTime" onclick="onTime()">Start Time</button></span>
+
+   </div>
+   <script>
+      const getTime=()=>{
+            let d= new Date();
+         // // console.log(d);
+         let h=d.getHours();//reuturn 24 hours
+         
+         h=h%12;
+         h=(h==0?12:h);
+         h=h>9?h:"0"+h;
+         // chaning am pm 12 hour
+         let amPm=h>=12?"PM":"AM";
+
+         // for minutes 
+         let m=d.getMinutes();
+         //adding 0 till 9
+         m=m>9?m:"0"+m;
+
+         // for seconds
+         let s=d.getSeconds();
+         if(s>9){
+            s=s;
+         }
+         else{
+           s="0"+s;
+         }
+
+         // for miliseconds
+         let mili=d.getMilliseconds();
+
+         return `${h} : ${m} : ${s} : ${amPm}`;
+
+         // now in online code
+         // return d.toLocaleTimeString();
+
+      }
+      // console.log(getTime());
+      let timer;
+   timer= setInterval(()=>{
+         // console.log(getTime());
+         // let timeob=document.querySelector(".clock");
+         let timeob=document.getElementById("clock");
+            timeob.innerHTML=getTime();
+      },1000) //give on if you want to see miliseconds
+   function stopTime(){
+      clearInterval(timer);
+   }
+
+
+   </script>
+</body>
+</html>
